@@ -1,31 +1,6 @@
 import React from "react";
-import styled from 'styled-components';
 
-import {STitle, SFormContent} from '../style/common';
-
-const SArrivalTimeInputForm = styled.div`
-    padding : 20px 15px;
-
-    & .row {
-        display: inline-flex;
-        position: relative;
-        width: 100%;
-
-        & select {
-            padding: 5px;
-            width: 100%;
-        }
-
-        & select + select {
-            margin-left: 15px;
-        }
-    }
-
-    & .row + .row {
-        margin-top : 15px;
-    }
-`;
-
+import {STitle, SFormContent, SForm, SRow} from '../style/common';
 
 function ArrivalTimeInputForm() {
 
@@ -47,11 +22,11 @@ function ArrivalTimeInputForm() {
     }
 
     return (
-        <SArrivalTimeInputForm>
+        <SForm>
             <STitle>숙소 도착예정 시간</STitle>
 
             <SFormContent>
-                <div className="row">
+                <SRow>
                     <select>
                         <option>시</option>
                         {hourRendering()}
@@ -60,10 +35,10 @@ function ArrivalTimeInputForm() {
                         <option>분</option>
                         {minuteRendering()}
                     </select>
-                </div>
+                </SRow>
             </SFormContent>
             
-        </SArrivalTimeInputForm>  
+        </SForm>  
     );
 }
 

@@ -15,6 +15,18 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
         word-break: keep-all;
         box-sizing: border-box;
+
+        letter-spacing: -0.055em;
+    }
+
+    input, select {
+      border: 0.2px solid lightslategrey;
+      border-radius: 4px;
+      height: 35px;
+    }
+
+    & input[type="checkbox"] {
+        height: fit-content;
     }
 `;
 

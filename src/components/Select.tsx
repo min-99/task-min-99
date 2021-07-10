@@ -24,6 +24,10 @@ const SSelect = styled.div`
         display: inline-flex;
         width: 100%;
 
+        border: 0.2px solid lightslategrey;
+        border-radius: 4px;
+        height: 35px;
+
         & div {
             padding: 5px;
             width: 100%;

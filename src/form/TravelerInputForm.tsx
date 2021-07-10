@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Input from '../components/Input';
 import Select from '../components/Select';
 
+import {STitle} from '../style/common';
+
 interface TravelerInputForm{
     title: string,
     number: number,
@@ -12,15 +14,6 @@ interface TravelerInputForm{
 
 const STravelerInputForm = styled.div`
     padding : 20px 15px;
-
-    & .TravelerInputFormTitle {
-        font-size: 18px; 
-        font-weight: 600;
-
-        & .number{
-            color: deepskyblue;
-        }
-    }
 
     & .TravelerInputFormSubTitle {
         font-size: 11px;
@@ -44,7 +37,7 @@ function TravelerInputForm ({title, number, subTitle} : TravelerInputForm) {
 
     return (
         <STravelerInputForm>
-            <div className="TravelerInputFormTitle">{title}&nbsp;<span className="number">{number}</span></div>
+            <STitle>{title}&nbsp;<span className="number">{number}</span></STitle>
             {subTitle && <div className="TravelerInputFormSubTitle">{subTitle}</div>}
 
             {/* 영문 이름 start */}

@@ -1,19 +1,15 @@
 import React from "react";
 import styled from 'styled-components';
 
+import {STitle, SFormContent} from '../style/common';
+
 const SArrivalTimeInputForm = styled.div`
     padding : 20px 15px;
-
-    & .ArrivalTimeInputFormTitle {
-        font-size: 18px; 
-        font-weight: 600;
-    }
 
     & .row {
         display: inline-flex;
         position: relative;
         width: 100%;
-        margin: 13px 0px;
 
         & select {
             padding: 5px;
@@ -52,18 +48,21 @@ function ArrivalTimeInputForm() {
 
     return (
         <SArrivalTimeInputForm>
-            <div className="ArrivalTimeInputFormTitle">숙소 도착예정 시간</div>
+            <STitle>숙소 도착예정 시간</STitle>
 
-            <div className="row">
-                <select>
-                    <option>시</option>
-                    {hourRendering()}
-                </select>
-                <select>
-                    <option>분</option>
-                    {minuteRendering()}
-                </select>
-            </div>
+            <SFormContent>
+                <div className="row">
+                    <select>
+                        <option>시</option>
+                        {hourRendering()}
+                    </select>
+                    <select>
+                        <option>분</option>
+                        {minuteRendering()}
+                    </select>
+                </div>
+            </SFormContent>
+            
         </SArrivalTimeInputForm>  
     );
 }

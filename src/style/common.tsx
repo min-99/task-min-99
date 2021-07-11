@@ -59,3 +59,11 @@ export const SRow = styled.div`
         margin-top : 15px;
     }
 `;
+
+export const SErrorMessage = styled.div`
+    color: red;
+    font-size: 11px;
+    letter-spacing: -0.099em;
+    padding-top: 2px;
+    line-height: 13px;
+`;

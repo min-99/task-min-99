@@ -28,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
     & input[type="checkbox"] {
         height: fit-content;
     }
+
+    input.error {
+        border: 1px solid red;
+    }
 `;
 
 export default GlobalStyle;

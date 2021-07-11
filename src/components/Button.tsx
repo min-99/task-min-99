@@ -4,11 +4,17 @@ import styled from 'styled-components';
 interface Button {
     title: string, 
     name: string, 
+    isActive : boolean,
+    onClick : (e : React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const SButton = styled.button`
+interface SButtonProps {
+    isActive : boolean
+}
+
+const SButton = styled.button<SButtonProps>`
     width: 100%;
-    background-color: #51ABF3;
+    background-color: ${(props) => (props.isActive ? '#51ABF3' : 'gray')};
     border: none;
     height: 44px;
     border-radius: 4px;
@@ -17,10 +23,10 @@ const SButton = styled.button`
 `;
 
 
-function Button ({title, name}: Button) {
+function Button ({title, name, isActive, onClick}: Button) {
     return (
         <>
-        <SButton type="button" name={name}>{title}</SButton>
+            <SButton type="button" name={name} isActive={isActive} onClick={onClick}>{title}</SButton>
         </>
     );
 }

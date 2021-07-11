@@ -1,11 +1,15 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import styled from 'styled-components';
+
+import {SErrorMessage} from '../style/common';
 
 interface Input {
     title: string, 
     name: string, 
     placeholder: string,
-    value: string
+    value: string,
+    error : string | null,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const SInput = styled.div`
@@ -26,19 +30,19 @@ const SInput = styled.div`
         padding : 5px;
         width: 100%;
     }
-
-    
 `;
 
-function Input ({title, name, placeholder, value}: Input) {
+const Input = forwardRef<HTMLInputElement, Input>((props, ref) => {
+    const {title, name, placeholder, value, error, onChange} = props;
+
     return (
         <SInput>
             <div className="inputTitle">{title}</div>
-            <input name={name} placeholder={placeholder} value={value}></input>
+            <input name={name} className={error ? 'error' : ''} placeholder={placeholder} value={value} ref={ref} onChange={onChange}></input>
+            {error && <SErrorMessage>{error}</SErrorMessage>}
         </SInput>
     );
-}
-
+})
 
 
 export default Input;

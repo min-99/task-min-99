@@ -1,11 +1,14 @@
 import React from "react";
 import styled from 'styled-components';
 
-import {SFlexDiv} from '../style/common';
+import {SFlexDiv, SErrorMessage} from '../style/common';
+import { errorType } from "../type";
 
 interface Phone {
-    selectValue: string,
-    value: string
+    InternationalNumber: string,
+    phoneNumber: string,
+    error : errorType,
+    onChangePhoneNumber : (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const SPhone = styled.div`
@@ -34,16 +37,17 @@ const SPhone = styled.div`
     }
 `;
 
-function Phone ({selectValue, value}: Phone) {
+function Phone ({InternationalNumber, phoneNumber, error, onChangePhoneNumber}: Phone) {
     return (
         <SPhone>
             <div className="phoneTitle">핸드폰 번호</div>
             <SFlexDiv>
                 <select>
-                    <option value={82}>+82 (대한민국)</option>
+                    <option value="82" selected={InternationalNumber === "82"}>+82 (대한민국)</option>
                 </select>
-                <input name="phoneNumber" placeholder="'-'없이 입력해 주세요." value={value}></input>
+                <input name="phoneNumber" className={error ? 'error' : ''} placeholder="'-'없이 입력해 주세요." value={phoneNumber} onChange={onChangePhoneNumber}></input>
             </SFlexDiv>  
+            {error && <SErrorMessage>{error}</SErrorMessage>}
         </SPhone>
     );
 }

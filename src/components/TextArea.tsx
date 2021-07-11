@@ -1,9 +1,15 @@
 import React from "react";
 import styled from 'styled-components';
+import { errorType } from "../type";
+
+import {SErrorMessage} from '../style/common';
 
 interface TextArea {
+    name : string,
     placeholder: string,
-    value: string
+    value: string,
+    error : errorType,
+    onChange : (e : React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 const STextArea = styled.div`
@@ -30,15 +36,14 @@ const STextArea = styled.div`
     
 `;
 
-function TextArea ({ placeholder, value}: TextArea) {
+function TextArea ({ name, placeholder, value, error, onChange}: TextArea) {
     return (
         <STextArea>
             <div className="TextAreaTitle">오시는 교통 수단을 적어주세요.</div>
-            <textarea placeholder={placeholder}>{value}</textarea>
+            <textarea name={name} className={error ? 'error' : ''} placeholder={placeholder} onChange={onChange}>{value}</textarea>
+            {error && <SErrorMessage>{error}</SErrorMessage>}
         </STextArea>
     );
 }
-
-
 
 export default TextArea;

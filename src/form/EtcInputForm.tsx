@@ -5,9 +5,13 @@ import TextArea from '../components/TextArea';
 import {STitle, SFormContent, SForm, SRow} from '../style/common';
 import {errorType} from '../type';
 import {usePaymentState, usePaymentDispatch} from '../PaymentContext/PaymentContext';
+import {etcInfoValidation} from '../utill/validation';
 
+interface EtcInputForm{
+    etcInfoRef : React.RefObject<HTMLTextAreaElement>,
+}
 
-function EtcInputForm () {
+function EtcInputForm ({etcInfoRef} : EtcInputForm) {
     const state = usePaymentState();
     const dispatch = usePaymentDispatch();
 
@@ -15,20 +19,9 @@ function EtcInputForm () {
 
     const onChange = useCallback((e : React.ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        let error : errorType = null;
-
-        // 검증 로직
-        switch(name){
-            case 'etcInfo' : 
-                if(value.length === 0){
-                    error = "기타 예약 정보를 입력해주세요.";
-                }else if(value.length > 200){
-                    error = "최대 200자까지 입력 가능합니다.";
-                }
-                break;
-        }
-
-        dispatch({type : 'SET_ETC_INFO_TIME', name , value, error : error});
+        let error : errorType = etcInfoValidation(name, value);
+   
+        dispatch({type : 'SET_ETC_INFO', name , value, error : error});
     }, []);
 
     return (
@@ -37,7 +30,7 @@ function EtcInputForm () {
 
             <SFormContent>
                 <SRow>
-                    <TextArea name="etcInfo" placeholder="답변을 입력해 주세요." error={etcInfo.error} value={etcInfo.value} onChange={onChange}></TextArea>
+                    <TextArea name="etcInfo" placeholder="답변을 입력해 주세요." error={etcInfo.error} value={etcInfo.value} ref={etcInfoRef} onChange={onChange}></TextArea>
                 </SRow>  
             </SFormContent>
             

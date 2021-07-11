@@ -8,10 +8,10 @@ type Action =
   | { type: 'SET_TRAVELER_INPUT', name: string, value : string, error : errorType }
   | { type: 'SET_ARRIVAL_TIME', name: string, value : string, error : errorType}
   | { type: 'SET_ARRIVAL_TIME_ERROR', error : errorType}
-  | { type: 'SET_PHONE_DETAIL_TIME', name: string, value : string, error : errorType}
-  | { type: 'SET_ETC_INFO_TIME', name: string, value : string, error : errorType}
-  | { type: 'SET_TERM_AGREE_TIME', name: string, value : boolean}
-  | { type: 'SET_TERM_AGREE_TIME_ALL', value : boolean};
+  | { type: 'SET_PHONE_DETAIL', name: string, value : string, error : errorType}
+  | { type: 'SET_ETC_INFO', name: string, value : string, error : errorType}
+  | { type: 'SET_TERM_AGREE', name: string, value : boolean}
+  | { type: 'SET_TERM_AGREE_ALL', value : boolean};
 
 // 디스패치를 위한 타입 (Dispatch 를 리액트에서 불러올 수 있음), 액션들의 타입을 Dispatch 의 Generics로 설정
 type PaymentDispatch = Dispatch<Action>;
@@ -51,7 +51,7 @@ function reducer(state: PaymentStateType, action: Action): PaymentStateType {
           error : action.error
         }
       };
-    case 'SET_PHONE_DETAIL_TIME':
+    case 'SET_PHONE_DETAIL':
       return {
         ...state,
         phoneDetail : {
@@ -62,7 +62,7 @@ function reducer(state: PaymentStateType, action: Action): PaymentStateType {
           }
         } 
       };
-    case 'SET_ETC_INFO_TIME':
+    case 'SET_ETC_INFO':
       return {
         ...state,
         etcInfo : {
@@ -70,7 +70,7 @@ function reducer(state: PaymentStateType, action: Action): PaymentStateType {
           error : action.error
         } 
       };
-    case 'SET_TERM_AGREE_TIME':
+    case 'SET_TERM_AGREE':
       return {
         ...state,
         termsAgree : {
@@ -78,7 +78,7 @@ function reducer(state: PaymentStateType, action: Action): PaymentStateType {
           [action.name] : action.value
         }
       };
-    case 'SET_TERM_AGREE_TIME_ALL':
+    case 'SET_TERM_AGREE_ALL':
       return {
         ...state,
         termsAgree : {

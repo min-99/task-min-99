@@ -8,6 +8,7 @@ interface Phone {
     InternationalNumber: string,
     phoneNumber: string,
     error : errorType,
+    phoneNumberRef : React.RefObject<HTMLInputElement>,
     onChangePhoneNumber : (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -37,15 +38,15 @@ const SPhone = styled.div`
     }
 `;
 
-function Phone ({InternationalNumber, phoneNumber, error, onChangePhoneNumber}: Phone) {
+function Phone ({InternationalNumber, phoneNumber, error, phoneNumberRef, onChangePhoneNumber}: Phone) {
     return (
         <SPhone>
             <div className="phoneTitle">핸드폰 번호</div>
             <SFlexDiv>
-                <select>
-                    <option value="82" selected={InternationalNumber === "82"}>+82 (대한민국)</option>
+                <select defaultValue={InternationalNumber}>
+                    <option value="82">+82 (대한민국)</option>
                 </select>
-                <input name="phoneNumber" className={error ? 'error' : ''} placeholder="'-'없이 입력해 주세요." value={phoneNumber} onChange={onChangePhoneNumber}></input>
+                <input name="phoneNumber" className={error ? 'error' : ''} placeholder="'-'없이 입력해 주세요." value={phoneNumber} ref={phoneNumberRef} onChange={onChangePhoneNumber}></input>
             </SFlexDiv>  
             {error && <SErrorMessage>{error}</SErrorMessage>}
         </SPhone>

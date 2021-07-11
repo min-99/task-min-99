@@ -29,8 +29,8 @@ const GlobalStyle = createGlobalStyle`
         height: fit-content;
     }
 
-    input.error {
-        border: 1px solid red;
+    .error {
+        border: 1px solid red !important
     }
 `;
 

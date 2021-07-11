@@ -29,12 +29,12 @@ function TermsForm() {
     const onChange = useCallback((e : React.ChangeEvent<HTMLInputElement>) => {
         const { name, checked } = e.target;
 
-        dispatch({type : 'SET_TERM_AGREE_TIME', name , value : checked});
+        dispatch({type : 'SET_TERM_AGREE', name , value : checked});
     }, []);
 
     const onChangeAll = useCallback((e : React.ChangeEvent<HTMLInputElement>) => {
         let checked = e.target.checked;
-        dispatch({type : 'SET_TERM_AGREE_TIME_ALL', value : checked});
+        dispatch({type : 'SET_TERM_AGREE_ALL', value : checked});
     }, []);
 
     return (

@@ -6,9 +6,15 @@ import {STitle, SFormContent, SForm, SRow} from '../style/common';
 
 import {errorType} from '../type';
 import {usePaymentState, usePaymentDispatch} from '../PaymentContext/PaymentContext';
+import { phoneDetailValidation } from "../utill/validation";
 
 
-function PhoneInputForm () {
+interface PhoneInputForm {
+    userNameRef : React.RefObject<HTMLInputElement>,
+    phoneNumberRef : React.RefObject<HTMLInputElement>,
+}
+
+function PhoneInputForm ({userNameRef, phoneNumberRef} : PhoneInputForm) {
     const state = usePaymentState();
     const dispatch = usePaymentDispatch();
 
@@ -17,34 +23,10 @@ function PhoneInputForm () {
     // change
     const onChange = useCallback((e : React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        let error : errorType = null;
+        let error : errorType = phoneDetailValidation(name, value);
 
-        // 검증 로직
-        switch(name){
-            case 'userName' : 
-                if(value.length < 2){
-                    error = "최소 2자 이상 입력해주세요.";
-                }else if(value.length > 20){
-                    error = "최대 20자까지 입력 가능합니다.";
-                }else if(!/^[a-zA-Z\s]+$/.test(value)){
-                    error = "영어와 띄어쓰기만 입력 가능합니다.";
-                }
-                break;
-            case 'phoneNumber' : 
-                if(value.length < 2){
-                    error = "최소 2자 이상 입력해주세요.";
-                }else if(value.length > 20){
-                    error = "최대 20자까지 입력 가능합니다.";
-                }else if(!/^[0-9]+$/.test(value)){
-                    error = "숫자(0~9)만 입력 가능합니다.";
-                }
-            break;
-        }
-
-        dispatch({type : 'SET_PHONE_DETAIL_TIME', name , value, error : error});
+        dispatch({type : 'SET_PHONE_DETAIL', name , value, error : error});
     }, []);
-
-    const userNameRef = useRef<HTMLInputElement>(null);
 
     return (
         <SForm>
@@ -56,7 +38,7 @@ function PhoneInputForm () {
                 </SRow> 
 
                 <SRow>
-                    <Phone InternationalNumber={phoneDetail.InternationalNumber} phoneNumber={phoneDetail.phoneNumber.value} error={phoneDetail.phoneNumber.error} onChangePhoneNumber={onChange}></Phone>
+                    <Phone InternationalNumber={phoneDetail.InternationalNumber} phoneNumber={phoneDetail.phoneNumber.value} error={phoneDetail.phoneNumber.error} phoneNumberRef={phoneNumberRef} onChangePhoneNumber={onChange}></Phone>
                 </SRow> 
             </SFormContent>
             

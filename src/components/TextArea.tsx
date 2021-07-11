@@ -1,4 +1,4 @@
-import React from "react";
+import React,{forwardRef} from "react";
 import styled from 'styled-components';
 import { errorType } from "../type";
 
@@ -36,14 +36,15 @@ const STextArea = styled.div`
     
 `;
 
-function TextArea ({ name, placeholder, value, error, onChange}: TextArea) {
+const TextArea = forwardRef<HTMLTextAreaElement, TextArea>((props, ref) => {
+    const { name, placeholder, value, error, onChange } = props;
     return (
         <STextArea>
             <div className="TextAreaTitle">오시는 교통 수단을 적어주세요.</div>
-            <textarea name={name} className={error ? 'error' : ''} placeholder={placeholder} onChange={onChange}>{value}</textarea>
+            <textarea name={name} className={error ? 'error' : ''} placeholder={placeholder} ref={ref} onChange={onChange} value={value}></textarea>
             {error && <SErrorMessage>{error}</SErrorMessage>}
         </STextArea>
     );
-}
+})
 
 export default TextArea;

@@ -22,7 +22,7 @@ function EtcInputForm ({etcInfoRef} : EtcInputForm) {
         let error : errorType = etcInfoValidation(name, value);
    
         dispatch({type : 'SET_ETC_INFO', name , value, error : error});
-    }, []);
+    }, [dispatch]);
 
     return (
         <SForm>

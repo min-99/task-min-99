@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-eval */
 import React, {useCallback, useRef, useEffect} from "react";
 import styled from 'styled-components';
 
@@ -44,7 +46,7 @@ function Payment() {
         type travelerKeyType = 'englishLastName'| 'englishFirstName'| 'koreanName'| 'gender'| 'birthday';
 
         // 여행자 정보 검증
-        travelerTarget.map((x : string)  => {
+        travelerTarget.map((x : string) => {
             error = travelerValidation(x, state.traveler[(x as travelerKeyType)].value);
             if (error !== null){
                 dispatch({type : 'SET_TRAVELER_INPUT', name : x , value: state.traveler[(x as travelerKeyType)].value, error});
@@ -87,13 +89,15 @@ function Payment() {
         }
 
 
-        if (isEnd)
+        if (isEnd){
             return false;
+        }
 
         // 검증이 완료되었는지 확인
         alert("예약이 완료 되었습니다.");
+        return true;
 
-    }, [state]);
+    }, [dispatch, state.arrivalTime.hour, state.arrivalTime.minute, state.etcInfo.value, state.phoneDetail, state.traveler]);
 
     useEffect(() => {
         englishLastNameRef.current?.focus();

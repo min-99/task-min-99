@@ -1,4 +1,4 @@
-import React, {useRef, useCallback} from "react";
+import React, {useCallback} from "react";
 
 import Input from '../components/Input';
 import Phone from '../components/Phone';
@@ -26,7 +26,7 @@ function PhoneInputForm ({userNameRef, phoneNumberRef} : PhoneInputForm) {
         let error : errorType = phoneDetailValidation(name, value);
 
         dispatch({type : 'SET_PHONE_DETAIL', name , value, error : error});
-    }, []);
+    }, [dispatch]);
 
     return (
         <SForm>

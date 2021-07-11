@@ -32,13 +32,13 @@ function TravelerInputForm ({title, subTitle, englishLastNameRef, englishFirstNa
         let error : errorType = travelerValidation(name, value);
 
         dispatch({type : 'SET_TRAVELER_INPUT', name , value, error});
-    }, []);
+    }, [dispatch]);
 
     const onClick = useCallback((e : React.MouseEvent<HTMLElement>) => {
         const {value} = e.currentTarget.dataset;
 
         dispatch({type : 'SET_TRAVELER_INPUT', name : "gender" , value : value ?? '', error : null});
-    }, []);
+    }, [dispatch]);
 
     
 

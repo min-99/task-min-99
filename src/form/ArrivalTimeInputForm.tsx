@@ -18,7 +18,7 @@ function ArrivalTimeInputForm({arrivalTimeRef} : ArrivalTimeInputForm) {
         const { name, value } = e.target;
         
         dispatch({type : 'SET_ARRIVAL_TIME', name , value, error : null});
-    }, []);
+    }, [dispatch]);
 
     function hourRendering(){
         const result = [];
